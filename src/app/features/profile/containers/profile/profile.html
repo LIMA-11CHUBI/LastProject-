@@ -1,0 +1,63 @@
+<div class="profile">
+  <div class="profile__container">
+
+    <div class="profile__sidebar">
+      <img
+        [src]="authService.currentUser()?.avatar || 'assets/default-avatar.png'"
+        alt="avatar"
+        class="profile__avatar"
+      />
+      <h3 class="profile__name">
+        {{ authService.currentUser()?.firstName }} {{ authService.currentUser()?.lastName }}
+      </h3>
+      <p class="profile__email">{{ authService.currentUser()?.email }}</p>
+
+      <div class="profile__tabs">
+        <button
+          class="profile__tab"
+          [class.profile__tab--active]="activeTab() === 'info'"
+          (click)="activeTab.set('info')"
+        >
+          პირადი ინფო
+        </button>
+        <button
+          class="profile__tab"
+          [class.profile__tab--active]="activeTab() === 'favorites'"
+          (click)="activeTab.set('favorites')"
+        >
+          ფავორიტები
+        </button>
+        <button
+          class="profile__tab"
+          [class.profile__tab--active]="activeTab() === 'password'"
+          (click)="activeTab.set('password')"
+        >
+          პაროლის შეცვლა
+        </button>
+      </div>
+
+      @if(!showDeleteConfirm()) {
+        <button class="profile__delete-btn" (click)="showDeleteConfirm.set(true)">
+          აккаунтის წაშლა
+        </button>
+      } @else {
+        <div class="profile__delete-confirm">
+          <p>დარწმუნებული ხარ?</p>
+          <button class="profile__delete-confirm-yes" (click)="deleteAccount()">კი, წაშლა</button>
+          <button class="profile__delete-confirm-no" (click)="showDeleteConfirm.set(false)">გაუქმება</button>
+        </div>
+      }
+    </div>
+
+    <div class="profile__content">
+      @if(activeTab() === 'info') {
+        <app-profile-info [user]="authService.currentUser()"></app-profile-info>
+      } @else if(activeTab() === 'favorites') {
+        <app-favorites></app-favorites>
+      } @else {
+        <app-change-password></app-change-password>
+      }
+    </div>
+
+  </div>
+</div>

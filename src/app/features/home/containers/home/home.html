@@ -1,0 +1,32 @@
+<div class="home">
+  <div class="home__content">
+
+    <aside class="home__filters">
+      <app-filters
+        [categories]="categories()"
+        [brands]="brands()"
+        (filterChange)="onFilterChange($event)"
+      ></app-filters>
+    </aside>
+
+    <main class="home__main">
+      @if(showCarousel()) {
+        <app-carousel [products]="popularProducts()"></app-carousel>
+      }
+
+      @if(isLoading()) {
+        <div class="home__loading">
+          <p>იტვირთება...</p>
+        </div>
+      } @else {
+        <app-product-list [products]="products()"></app-product-list>
+        <app-pagination
+          [currentPage]="currentPage()"
+          [totalPages]="totalPages()"
+          (pageChange)="onPageChange($event)"
+        ></app-pagination>
+      }
+    </main>
+
+  </div>
+</div>

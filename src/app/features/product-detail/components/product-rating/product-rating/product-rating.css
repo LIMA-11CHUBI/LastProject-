@@ -1,0 +1,50 @@
+.product-rating {
+  background-color: #1a1a35;
+  border: 1px solid #2d2d5a;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.product-rating__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 12px;
+}
+
+.product-rating__current {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  margin-bottom: 16px;
+}
+
+.product-rating__stars {
+  display: flex;
+  gap: 8px;
+}
+
+.product-rating__star {
+  font-size: 2rem;
+  color: #2d2d5a;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.product-rating__star--active {
+  color: #f4c430;
+}
+
+.product-rating__login {
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.product-rating__login a {
+  color: #a855f7;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.product-rating__login a:hover {
+  text-decoration: underline;
+}

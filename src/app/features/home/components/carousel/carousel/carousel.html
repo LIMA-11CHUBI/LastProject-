@@ -1,0 +1,32 @@
+<div class="carousel">
+  @if(products.length > 0) {
+    <div class="carousel__slide">
+      <img
+        [src]="products[currentIndex()].thumbnail"
+        [alt]="products[currentIndex()].title"
+        [routerLink]="['/product', products[currentIndex()]._id]"
+      />
+      <div class="carousel__info">
+        <h3>{{ products[currentIndex()].title }}</h3>
+        <p>{{ products[currentIndex()].price.current }} {{ products[currentIndex()].price.currency }}</p>
+      </div>
+    </div>
+
+    <button class="carousel__btn carousel__btn--prev" (click)="prev()">
+      
+    </button>
+    <button class="carousel__btn carousel__btn--next" (click)="next()">
+      >
+    </button>
+
+    <div class="carousel__dots">
+      @for(product of products; track product._id; let i = $index) {
+        <span
+          class="carousel__dot"
+          [class.carousel__dot--active]="i === currentIndex()"
+          (click)="goTo(i)"
+        ></span>
+      }
+    </div>
+  }
+</div>

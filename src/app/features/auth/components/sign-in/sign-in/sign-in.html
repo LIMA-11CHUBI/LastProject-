@@ -1,0 +1,31 @@
+<div class="sign-in">
+  <h2 class="sign-in__title">შესვლა</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="sign-in__field">
+      <label>ელ-ფოსტა</label>
+      <input type="email" formControlName="email" placeholder="example@mail.com"/>
+      @if(form.get('email')?.invalid && form.get('email')?.touched) {
+        <span class="sign-in__error">შეიყვანე სწორი ელ-ფოსტა</span>
+      }
+    </div>
+
+    <div class="sign-in__field">
+      <label>პაროლი</label>
+      <input type="password" formControlName="password" placeholder="მინიმუმ 8 სიმბოლო"/>
+      @if(form.get('password')?.invalid && form.get('password')?.touched) {
+        <span class="sign-in__error">პაროლი მინიმუმ 8 სიმბოლო უნდა იყოს</span>
+      }
+    </div>
+
+    @if(errorMessage()) {
+      <div class="sign-in__error-box">{{ errorMessage() }}</div>
+    }
+
+    <button type="submit" class="sign-in__btn" [disabled]="form.invalid || isLoading()">
+      {{ isLoading() ? 'იტვირთება...' : 'შესვლა' }}
+    </button>
+
+  </form>
+</div>

@@ -1,0 +1,47 @@
+<div class="qr-generator">
+  <div class="qr-generator__tabs">
+    <button
+      class="qr-generator__tab"
+      [class.qr-generator__tab--active]="activeTab() === 'text'"
+      (click)="activeTab.set('text')"
+    >
+      ტექსტით
+    </button>
+    <button
+      class="qr-generator__tab"
+      [class.qr-generator__tab--active]="activeTab() === 'image'"
+      (click)="activeTab.set('image')"
+    >
+      სურათით
+    </button>
+  </div>
+
+  @if(activeTab() === 'text') {
+    <form [formGroup]="textForm" (ngSubmit)="onGenerateText()">
+      <div class="qr-generator__field">
+        <label>ტექსტი ან URL</label>
+        <input type="text" formControlName="text" placeholder="https://..."/>
+        @if(textForm.get('text')?.invalid && textForm.get('text')?.touched) {
+          <span class="qr-generator__error">ტექსტი სავალდებულოა</span>
+        }
+      </div>
+      <button type="submit" class="qr-generator__btn" [disabled]="textForm.invalid || isLoading">
+        {{ isLoading ? 'იტვირთება...' : 'გენერირება' }}
+      </button>
+    </form>
+  } @else {
+    <form [formGroup]="imageForm" (ngSubmit)="onGenerateWithImage()">
+      <div class="qr-generator__field">
+        <label>ტექსტი ან URL</label>
+        <input type="text" formControlName="text" placeholder="https://..."/>
+      </div>
+      <div class="qr-generator__field">
+        <label>სურათის URL</label>
+        <input type="text" formControlName="imageURL" placeholder="https://image.png"/>
+      </div>
+      <button type="submit" class="qr-generator__btn" [disabled]="imageForm.invalid || isLoading">
+        {{ isLoading ? 'იტვირთება...' : 'გენერირება' }}
+      </button>
+    </form>
+  }
+</div>

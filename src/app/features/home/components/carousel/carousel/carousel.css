@@ -1,0 +1,96 @@
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  background-color: #13132a;
+  border: 1px solid #2d2d5a;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2);
+}
+
+.carousel__slide {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+.carousel__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.carousel__info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(13, 13, 26, 0.9));
+  color: #fff;
+}
+
+.carousel__info h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.carousel__info p {
+  margin: 0;
+  font-size: 1rem;
+  color: #a855f7;
+  font-weight: 700;
+}
+
+.carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(124, 58, 237, 0.3);
+  color: #fff;
+  border: 1px solid #7c3aed;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  z-index: 10;
+}
+
+.carousel__btn:hover {
+  background-color: rgba(124, 58, 237, 0.6);
+}
+
+.carousel__btn--prev {
+  left: 16px;
+}
+
+.carousel__btn--next {
+  right: 16px;
+}
+
+.carousel__dots {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.carousel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.carousel__dot--active {
+  background-color: #7c3aed;
+}

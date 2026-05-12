@@ -1,0 +1,56 @@
+<div class="product-detail">
+  @if(isLoading()) {
+    <div class="product-detail__loading">იტვირთება...</div>
+  } @else if(product()) {
+    <div class="product-detail__container">
+
+      <div class="product-detail__images">
+        <img [src]="product()!.thumbnail" [alt]="product()!.title" class="product-detail__main-img"/>
+        <div class="product-detail__thumbnails">
+          @for(image of product()!.images; track image) {
+            <img [src]="image" [alt]="product()!.title" class="product-detail__thumb"/>
+          }
+        </div>
+      </div>
+
+      <div class="product-detail__info">
+        <app-product-info [product]="product()!"></app-product-info>
+
+        <div class="product-detail__price">
+          @if(product()!.price.discountPercentage > 0) {
+            <span class="product-detail__price--old">
+              {{ product()!.price.beforeDiscount }} {{ product()!.price.currency }}
+            </span>
+            <span class="product-detail__price--discount">
+              -{{ product()!.price.discountPercentage }}%
+            </span>
+          }
+          <span class="product-detail__price--current">
+            {{ product()!.price.current }} {{ product()!.price.currency }}
+          </span>
+        </div>
+
+        <button
+          class="product-detail__btn"
+          (click)="addToCart()"
+          [disabled]="isAddingToCart() || product()!.stock === 0"
+        >
+          @if(product()!.stock === 0) {
+            მარაგი ამოწურულია
+          } @else if(isAddingToCart()) {
+            დამატება...
+          } @else {
+            კალათაში დამატება 🛒
+          }
+        </button>
+
+        <app-product-rating
+          [rating]="product()!.rating"
+          [isLoggedIn]="!!authService.currentUser()"
+          (rate)="onRate($event)"
+        ></app-product-rating>
+      </div>
+
+    </div>
+  }
+</div>

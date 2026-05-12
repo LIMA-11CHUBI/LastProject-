@@ -1,0 +1,24 @@
+<div class="cart-summary">
+  <h3 class="cart-summary__title">შეკვეთის შეჯამება</h3>
+
+  <div class="cart-summary__row">
+    <span>პროდუქტები:</span>
+    <span>{{ cart.total.products }}</span>
+  </div>
+
+  <div class="cart-summary__row">
+    <span>რაოდენობა:</span>
+    <span>{{ cart.total.quantity }}</span>
+  </div>
+
+  <div class="cart-summary__divider"></div>
+
+  <div class="cart-summary__row cart-summary__row--total">
+    <span>სულ:</span>
+    <span>{{ cart.total.price.current }} ₾</span>
+  </div>
+
+  <button class="cart-summary__btn" (click)="checkout.emit()">
+    შეკვეთის განთავსება
+  </button>
+</div>

@@ -1,0 +1,77 @@
+.sign-in {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sign-in__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0;
+  text-align: center;
+}
+
+.sign-in__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sign-in__field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #a855f7;
+}
+
+.sign-in__field input {
+  padding: 10px 14px;
+  border: 1px solid #2d2d5a;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #1a1a35;
+  color: #e2e8f0;
+  transition: border-color 0.2s;
+}
+
+.sign-in__field input:focus {
+  border-color: #7c3aed;
+}
+
+.sign-in__error {
+  font-size: 0.8rem;
+  color: #ef4444;
+}
+
+.sign-in__error-box {
+  padding: 10px 14px;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  border-radius: 8px;
+  color: #ef4444;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.sign-in__btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.sign-in__btn:hover:not([disabled]) {
+  opacity: 0.9;
+}
+
+.sign-in__btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

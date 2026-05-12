@@ -1,0 +1,65 @@
+<div class="profile-info">
+  <h3 class="profile-info__title">პირადი ინფორმაცია</h3>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="profile-info__row">
+      <div class="profile-info__field">
+        <label>სახელი</label>
+        <input type="text" formControlName="firstName"/>
+      </div>
+      <div class="profile-info__field">
+        <label>გვარი</label>
+        <input type="text" formControlName="lastName"/>
+      </div>
+    </div>
+
+    <div class="profile-info__row">
+      <div class="profile-info__field">
+        <label>ასაკი</label>
+        <input type="number" formControlName="age"/>
+      </div>
+      <div class="profile-info__field">
+        <label>სქესი</label>
+        <select formControlName="gender">
+          <option value="MALE">მამრობითი</option>
+          <option value="FEMALE">მდედრობითი</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="profile-info__field">
+      <label>მისამართი</label>
+      <input type="text" formControlName="address"/>
+    </div>
+
+    <div class="profile-info__row">
+      <div class="profile-info__field">
+        <label>ტელეფონი</label>
+        <input type="text" formControlName="phone"/>
+      </div>
+      <div class="profile-info__field">
+        <label>საფოსტო კოდი</label>
+        <input type="text" formControlName="zipcode"/>
+      </div>
+    </div>
+
+    <div class="profile-info__field">
+      <label>ავატარი (URL)</label>
+      <input type="text" formControlName="avatar"/>
+    </div>
+
+    @if(isSuccess()) {
+      <div class="profile-info__success">✅ პროფილი წარმატებით განახლდა!</div>
+    }
+
+    @if(errorMessage()) {
+      <div class="profile-info__error">{{ errorMessage() }}</div>
+    }
+
+    <button type="submit" class="profile-info__btn" [disabled]="isLoading()">
+      {{ isLoading() ? 'იტვირთება...' : 'შენახვა' }}
+    </button>
+
+  </form>
+</div>

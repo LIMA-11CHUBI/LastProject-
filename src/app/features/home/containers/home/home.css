@@ -1,0 +1,25 @@
+.home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.home__content {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+}
+
+.home__filters {
+  min-width: 0;
+}
+
+.home__main {
+  min-width: 0;
+}
+
+.home__loading {
+  text-align: center;
+  padding: 48px;
+  color: #94a3b8;
+}

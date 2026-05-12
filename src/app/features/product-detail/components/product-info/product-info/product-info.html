@@ -1,0 +1,29 @@
+<div class="product-info">
+  <h1 class="product-info__title">{{ product.title }}</h1>
+
+  <div class="product-info__meta">
+    <span class="product-info__brand">{{ product.brand }}</span>
+    <span class="product-info__category">{{ product.category.name }}</span>
+  </div>
+
+  <p class="product-info__description">{{ product.description }}</p>
+
+  <div class="product-info__details">
+    <div class="product-info__detail">
+      <span class="product-info__detail-label">რეიტინგი:</span>
+      <span>⭐ {{ product.rating }}</span>
+    </div>
+    <div class="product-info__detail">
+      <span class="product-info__detail-label">მარაგი:</span>
+      <span>{{ product.stock }} ცალი</span>
+    </div>
+    <div class="product-info__detail">
+      <span class="product-info__detail-label">გარანტია:</span>
+      <span>{{ product.warranty }} თვე</span>
+    </div>
+    <div class="product-info__detail">
+      <span class="product-info__detail-label">თარიღი:</span>
+      <span>{{ product.issueDate | date }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<nav class="navbar">
+  <div class="navbar__brand">
+    <a routerLink="/">MyShop</a>
+  </div>
+  <div class="navbar__links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">მთავარი</a>
+    <a routerLink="/quotes" routerLinkActive="active">ციტატები</a>
+    <a routerLink="/qrcode" routerLinkActive="active">QR კოდი</a>
+    <a routerLink="/admin" routerLinkActive="active">ადმინი</a>
+    
+  </div>
+
+  <div class="navbar__search">
+    <input
+      type="text"
+      placeholder="ძებნა..."
+      [formControl]="searchControl"
+      (keyup.enter)="onSearch()"
+    />
+    <button (click)="onSearch()">🔍</button>
+  </div>
+
+  <div class="navbar__profile">
+    <button class="navbar__profile-btn" (click)="toggleDropdown()">
+      <img
+        [src]="authService.currentUser()?.avatar || 'assets/default-avatar.png'"
+        alt="profile"
+      />
+    </button>
+
+    @if(isDropdownOpen) {
+      <div class="navbar__dropdown">
+        @if(authService.currentUser()) {
+          <a routerLink="/profile" (click)="isDropdownOpen = false">პროფილი</a>
+          <a routerLink="/cart" (click)="isDropdownOpen = false">კალათა</a>
+          <button (click)="logout()">გასვლა</button>
+        } @else {
+          <a routerLink="/auth" (click)="isDropdownOpen = false">შესვლა / რეგისტრაცია</a>
+          
+        }
+      </div>
+    }
+  </div>
+</nav>

@@ -1,0 +1,31 @@
+<div class="cart-item">
+  <div class="cart-item__image">
+    @if(product()) {
+      <img [src]="product()!.thumbnail" [alt]="product()!.title"/>
+    }
+  </div>
+
+  <div class="cart-item__info">
+    @if(product()) {
+      <a [routerLink]="['/product', item.productId]" class="cart-item__title">
+        {{ product()!.title }}
+      </a>
+      <p class="cart-item__brand">{{ product()!.brand }}</p>
+    } @else {
+      <p class="cart-item__id">{{ item.productId }}</p>
+    }
+    <p class="cart-item__price">{{ item.pricePerQuantity }} ₾</p>
+  </div>
+
+  <div class="cart-item__quantity">
+    <button (click)="decrease()">-</button>
+    <span>{{ item.quantity }}</span>
+    <button (click)="increase()">+</button>
+  </div>
+
+  <div class="cart-item__total">
+    <p>{{ item.pricePerQuantity * item.quantity }} ₾</p>
+  </div>
+
+  <button class="cart-item__delete" (click)="delete()">🗑</button>
+</div>

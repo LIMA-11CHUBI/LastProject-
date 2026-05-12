@@ -1,0 +1,25 @@
+<div class="product-rating">
+  <h4 class="product-rating__title">შეაფასე პროდუქტი</h4>
+
+  <div class="product-rating__current">
+    <span>მიმდინარე რეიტინგი: ⭐ {{ rating }}</span>
+  </div>
+
+  @if(isLoggedIn) {
+    <div class="product-rating__stars">
+      @for(star of stars; track star) {
+        <span
+          class="product-rating__star"
+          [class.product-rating__star--active]="star <= (hoveredStar() || selectedStar())"
+          (mouseenter)="onHover(star)"
+          (mouseleave)="onLeave()"
+          (click)="onRate(star)"
+        >
+          ★
+        </span>
+      }
+    </div>
+  } @else {
+    <p class="product-rating__login">შეფასებისთვის გაიარე <a routerLink="/auth">ავტორიზაცია</a></p>
+  }
+</div>

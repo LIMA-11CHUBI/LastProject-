@@ -1,0 +1,24 @@
+<div class="qrcode">
+  <div class="qrcode__container">
+    <h2 class="qrcode__title">QR კოდის გენერატორი</h2>
+
+    <div class="qrcode__content">
+      <div class="qrcode__left">
+        <app-qr-generator
+          [isLoading]="isLoading()"
+          (generate)="onGenerate($event)"
+          (generateWithImage)="onGenerateWithImage($event)"
+        ></app-qr-generator>
+      </div>
+
+      <div class="qrcode__right">
+        @if(generatedQr()) {
+          <app-qr-result [qr]="generatedQr()!"></app-qr-result>
+        } @else if(defaultQr()) {
+          <app-qr-result [qr]="defaultQr()!"></app-qr-result>
+        }
+      </div>
+    </div>
+
+  </div>
+</div>

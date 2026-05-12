@@ -1,0 +1,101 @@
+<div class="sign-up">
+  <h2 class="sign-up__title">რეგისტრაცია</h2>
+
+  @if(isSuccess()) {
+    <div class="sign-up__success">
+      ✅ რეგისტრაცია წარმატებით დასრულდა! გთხოვთ შეამოწმოთ ელ-ფოსტა დასადასტურებლად.
+    </div>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="sign-up__field">
+        <label>სახელი</label>
+        <input type="text" formControlName="firstName" placeholder="სახელი"/>
+        @if(form.get('firstName')?.invalid && form.get('firstName')?.touched) {
+          <span class="sign-up__error">სახელი სავალდებულოა (2-20 სიმბოლო)</span>
+        }
+      </div>
+
+      <div class="sign-up__field">
+        <label>გვარი</label>
+        <input type="text" formControlName="lastName" placeholder="გვარი"/>
+        @if(form.get('lastName')?.invalid && form.get('lastName')?.touched) {
+          <span class="sign-up__error">გვარი სავალდებულოა (2-20 სიმბოლო)</span>
+        }
+      </div>
+
+      <div class="sign-up__field">
+        <label>ელ-ფოსტა</label>
+        <input type="email" formControlName="email" placeholder="example@mail.com"/>
+        @if(form.get('email')?.invalid && form.get('email')?.touched) {
+          <span class="sign-up__error">შეიყვანე სწორი ელ-ფოსტა</span>
+        }
+      </div>
+
+      <div class="sign-up__field">
+        <label>პაროლი</label>
+        <input type="password" formControlName="password" placeholder="მინიმუმ 8 სიმბოლო"/>
+        @if(form.get('password')?.invalid && form.get('password')?.touched) {
+          <span class="sign-up__error">პაროლი მინიმუმ 8 სიმბოლო უნდა იყოს</span>
+        }
+      </div>
+
+      <div class="sign-up__field">
+        <label>ასაკი</label>
+        <input type="number" formControlName="age" placeholder="ასაკი"/>
+        @if(form.get('age')?.invalid && form.get('age')?.touched) {
+          <span class="sign-up__error">ასაკი სავალდებულოა</span>
+        }
+      </div>
+
+      <div class="sign-up__field">
+        <label>მისამართი</label>
+        <input type="text" formControlName="address" placeholder="მისამართი"/>
+        @if(form.get('address')?.invalid && form.get('address')?.touched) {
+          <span class="sign-up__error">მისამართი სავალდებულოა</span>
+        }
+      </div>
+
+      <div class="sign-up__field">
+        <label>ტელეფონი</label>
+        <input type="text" formControlName="phone" placeholder="+995XXXXXXXXX"/>
+        @if(form.get('phone')?.invalid && form.get('phone')?.touched) {
+          <span class="sign-up__error">ტელეფონი სავალდებულოა</span>
+        }
+      </div>
+
+      <div class="sign-up__field">
+        <label>საფოსტო კოდი</label>
+        <input type="text" formControlName="zipcode" placeholder="0000"/>
+        @if(form.get('zipcode')?.invalid && form.get('zipcode')?.touched) {
+          <span class="sign-up__error">საფოსტო კოდი სავალდებულოა</span>
+        }
+      </div>
+
+      <div class="sign-up__field">
+        <label>ავატარი (URL)</label>
+        <input type="text" formControlName="avatar" placeholder="https://..."/>
+        @if(form.get('avatar')?.invalid && form.get('avatar')?.touched) {
+          <span class="sign-up__error">ავატარი სავალდებულოა</span>
+        }
+      </div>
+
+      <div class="sign-up__field">
+        <label>სქესი</label>
+        <select formControlName="gender">
+          <option value="MALE">მამრობითი</option>
+          <option value="FEMALE">მდედრობითი</option>
+        </select>
+      </div>
+
+      @if(errorMessage()) {
+        <div class="sign-up__error-box">{{ errorMessage() }}</div>
+      }
+
+      <button type="submit" class="sign-up__btn" [disabled]="form.invalid || isLoading()">
+        {{ isLoading() ? 'იტვირთება...' : 'რეგისტრაცია' }}
+      </button>
+
+    </form>
+  }
+</div>

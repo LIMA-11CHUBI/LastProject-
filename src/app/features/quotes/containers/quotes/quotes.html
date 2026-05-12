@@ -1,0 +1,88 @@
+<div class="quotes">
+  <div class="quotes__container">
+    <div class="quotes__header">
+      <h2 class="quotes__title">ციტატები</h2>
+      @if(authService.currentUser()) {
+        <button class="quotes__add-btn" (click)="showAddForm.set(true)">
+          + ციტატის დამატება
+        </button>
+      }
+    </div>
+
+    @if(randomQuote()) {
+      <div class="quotes__random">
+        <p class="quotes__random-text">"{{ randomQuote()!.quote }}"</p>
+        <span class="quotes__random-author">— {{ randomQuote()!.author }}</span>
+        <span class="quotes__random-type">{{ randomQuote()!.type }}</span>
+      </div>
+    }
+
+    @if(showAddForm()) {
+      <div class="quotes__form">
+        <h3>{{ editingQuote() ? 'ციტატის რედაქტირება' : 'ახალი ციტატა' }}</h3>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="quotes__form-field">
+            <label>ავტორი</label>
+            <input type="text" formControlName="author" placeholder="ავტორი"/>
+          </div>
+          <div class="quotes__form-field">
+            <label>ციტატა</label>
+            <textarea formControlName="quote" placeholder="ციტატა" rows="3"></textarea>
+          </div>
+          <div class="quotes__form-field">
+            <label>ტიპი</label>
+            <select formControlName="type">
+              @for(type of quoteTypes(); track type) {
+                <option [value]="type">{{ type }}</option>
+              }
+            </select>
+          </div>
+          <div class="quotes__form-actions">
+            <button type="submit" class="quotes__form-submit" [disabled]="form.invalid">
+              {{ editingQuote() ? 'განახლება' : 'დამატება' }}
+            </button>
+            <button type="button" class="quotes__form-cancel" (click)="cancelForm()">
+              გაუქმება
+            </button>
+          </div>
+        </form>
+      </div>
+    }
+
+    <div class="quotes__filter">
+      <button
+        class="quotes__filter-btn"
+        [class.quotes__filter-btn--active]="selectedType() === ''"
+        (click)="onTypeChange('')"
+      >
+        ყველა
+      </button>
+      @for(type of quoteTypes(); track type) {
+        <button
+          class="quotes__filter-btn"
+          [class.quotes__filter-btn--active]="selectedType() === type"
+          (click)="onTypeChange(type)"
+        >
+          {{ type }}
+        </button>
+      }
+    </div>
+
+    @if(isLoading()) {
+      <div class="quotes__loading">იტვირთება...</div>
+    } @else {
+      <app-quote-list
+        [quotes]="quotes()"
+        [isLoggedIn]="!!authService.currentUser()"
+        (edit)="startEdit($event)"
+        (delete)="onDelete($event)"
+      ></app-quote-list>
+      <app-pagination
+        [currentPage]="currentPage()"
+        [totalPages]="totalPages()"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
+    }
+
+  </div>
+</div>

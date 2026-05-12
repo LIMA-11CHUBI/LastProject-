@@ -1,0 +1,160 @@
+<div class="admin">
+  <div class="admin__container">
+    <h2 class="admin__title">ადმინ პანელი</h2>
+
+    <div class="admin__tabs">
+      <button
+        class="admin__tab"
+        [class.admin__tab--active]="activeTab() === 'users'"
+        (click)="activeTab.set('users')"
+      >
+        მომხმარებლები
+      </button>
+      <button
+        class="admin__tab"
+        [class.admin__tab--active]="activeTab() === 'products'"
+        (click)="activeTab.set('products')"
+      >
+        პროდუქტები
+      </button>
+    </div>
+
+    @if(activeTab() === 'users') {
+      <div class="admin__users">
+        <div class="admin__search">
+          <input
+            type="text"
+            placeholder="მომხმარებლის ID"
+            [value]="searchId()"
+            (input)="searchId.set($any($event.target).value)"
+          />
+          <button (click)="searchUser()">ძებნა</button>
+        </div>
+
+        @if(foundUser()) {
+          <div class="admin__user-card">
+            <img [src]="foundUser()!.avatar" [alt]="foundUser()!.firstName"/>
+            <div>
+              <h3>{{ foundUser()!.firstName }} {{ foundUser()!.lastName }}</h3>
+              <p>{{ foundUser()!.email }}</p>
+              <p>{{ foundUser()!.address }}</p>
+              <p>{{ foundUser()!.phone }}</p>
+              <span [class]="foundUser()!.verified ? 'admin__verified' : 'admin__unverified'">
+                {{ foundUser()!.verified ? 'ვერიფიცირებული' : 'არა ვერიფიცირებული' }}
+              </span>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="admin__products">
+        <div class="admin__products-header">
+          <button class="admin__add-btn" (click)="showProductForm.set(true)">
+            + პროდუქტის დამატება
+          </button>
+          <button class="admin__delete-all-btn" (click)="deleteAllProducts()">
+            ყველა პროდუქტის წაშლა
+          </button>
+        </div>
+
+        @if(showProductForm()) {
+          <div class="admin__form">
+            <h3>{{ editingProduct() ? 'პროდუქტის რედაქტირება' : 'ახალი პროდუქტი' }}</h3>
+            <form [formGroup]="productForm" (ngSubmit)="onSubmitProduct()">
+              <div class="admin__form-grid">
+                <div class="admin__field">
+                  <label>სახელი</label>
+                  <input type="text" formControlName="title"/>
+                </div>
+                <div class="admin__field">
+                  <label>ბრენდი</label>
+                  <input type="text" formControlName="brand"/>
+                </div>
+                <div class="admin__field">
+                  <label>მარაგი</label>
+                  <input type="number" formControlName="stock"/>
+                </div>
+                <div class="admin__field">
+                  <label>გარანტია (თვე)</label>
+                  <input type="number" formControlName="warranty"/>
+                </div>
+                <div class="admin__field">
+                  <label>თარიღი</label>
+                  <input type="date" formControlName="issueDate"/>
+                </div>
+                <div class="admin__field">
+                  <label>Thumbnail URL</label>
+                  <input type="text" formControlName="thumbnail"/>
+                </div>
+              </div>
+
+              <div class="admin__field">
+                <label>აღწერა</label>
+                <textarea formControlName="description" rows="3"></textarea>
+              </div>
+
+              <div class="admin__field">
+                <label>სურათები (URL-ები მძიმით გამოყოფილი)</label>
+                <input type="text" formControlName="images"/>
+              </div>
+
+              <div formGroupName="price" class="admin__form-grid">
+                <div class="admin__field">
+                  <label>ფასი</label>
+                  <input type="number" formControlName="current"/>
+                </div>
+                <div class="admin__field">
+                  <label>ფასი ფასდაკლებამდე</label>
+                  <input type="number" formControlName="beforeDiscount"/>
+                </div>
+                <div class="admin__field">
+                  <label>ფასდაკლება %</label>
+                  <input type="number" formControlName="discountPercentage"/>
+                </div>
+                <div class="admin__field">
+                  <label>ვალუტა</label>
+                  <input type="text" formControlName="currency"/>
+                </div>
+              </div>
+
+              <div formGroupName="category" class="admin__form-grid">
+                <div class="admin__field">
+                  <label>კატეგორია</label>
+                  <input type="text" formControlName="name"/>
+                </div>
+                <div class="admin__field">
+                  <label>კატეგორიის სურათი URL</label>
+                  <input type="text" formControlName="image"/>
+                </div>
+              </div>
+
+              <div class="admin__form-actions">
+                <button type="submit" class="admin__submit-btn" [disabled]="productForm.invalid">
+                  {{ editingProduct() ? 'განახლება' : 'დამატება' }}
+                </button>
+                <button type="button" class="admin__cancel-btn" (click)="cancelProductForm()">
+                  გაუქმება
+                </button>
+              </div>
+            </form>
+          </div>
+        }
+
+        <div class="admin__product-list">
+          @for(product of products(); track product._id) {
+            <div class="admin__product-item">
+              <img [src]="product.thumbnail" [alt]="product.title"/>
+              <div class="admin__product-info">
+                <h4>{{ product.title }}</h4>
+                <p>{{ product.brand }} | {{ product.price.current }} {{ product.price.currency }}</p>
+                <p>მარაგი: {{ product.stock }}</p>
+              </div>
+              <button class="admin__edit-btn" (click)="startEditProduct(product)">✏️</button>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+  </div>
+</div>

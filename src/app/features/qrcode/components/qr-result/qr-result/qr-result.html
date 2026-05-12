@@ -1,0 +1,14 @@
+<div class="qr-result">
+  <h3 class="qr-result__title">შედეგი</h3>
+  <div class="qr-result__image">
+    <img [src]="qr.result" alt="QR Code"/>
+  </div>
+  <div class="qr-result__info">
+    <p><span>ტექსტი:</span> {{ qr.text }}</p>
+    <p><span>ფორმატი:</span> {{ qr.format }}</p>
+    <p><span>ტიპი:</span> {{ qr.type }}</p>
+  </div>
+  <a [href]="qr.result" download="qrcode.png" class="qr-result__download">
+    გადმოწერა
+  </a>
+</div>

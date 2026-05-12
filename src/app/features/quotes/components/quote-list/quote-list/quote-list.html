@@ -1,0 +1,10 @@
+<div class="quote-list">
+  @for(quote of quotes; track quote._id) {
+    <app-quote-card
+      [quote]="quote"
+      [isLoggedIn]="isLoggedIn"
+      (edit)="edit.emit($event)"
+      (delete)="delete.emit($event)"
+    ></app-quote-card>
+  }
+</div>

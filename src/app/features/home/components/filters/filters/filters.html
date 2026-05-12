@@ -1,0 +1,53 @@
+<div class="filters">
+  <h3 class="filters__title">ფილტრაცია</h3>
+
+  <div class="filters__section">
+    <h4>კატეგორია</h4>
+    @for(category of categories; track category.id) {
+      <label class="filters__item">
+        <input
+          type="radio"
+          name="category"
+          [value]="category.id"
+          [checked]="selectedCategory() === category.id"
+          (change)="selectedCategory.set(category.id); applyFilters()"
+        />
+        {{ category.name }}
+      </label>
+    }
+  </div>
+
+  <div class="filters__section">
+    <h4>ბრენდი</h4>
+    @for(brand of brands; track brand) {
+      <label class="filters__item">
+        <input
+          type="radio"
+          name="brand"
+          [value]="brand"
+          [checked]="selectedBrand() === brand"
+          (change)="selectedBrand.set(brand); applyFilters()"
+        />
+        {{ brand }}
+      </label>
+    }
+  </div>
+
+  <div class="filters__section">
+    <h4>დალაგება</h4>
+    <select (change)="selectedSort.set($any($event.target).value); applyFilters()">
+      <option value="">აირჩიე</option>
+      <option value="price">ფასი</option>
+      <option value="rating">რეიტინგი</option>
+      <option value="title">სახელი</option>
+      <option value="issue_date">თარიღი</option>
+    </select>
+
+    <select (change)="selectedDirection.set($any($event.target).value); applyFilters()">
+      <option value="asc">ზრდადი</option>
+      <option value="desc">კლებადი</option>
+    </select>
+  </div>
+
+  <button class="filters__reset" (click)="resetFilters()">გასუფთავება</button>
+</div>

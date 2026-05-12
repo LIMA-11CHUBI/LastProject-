@@ -1,0 +1,14 @@
+<div class="quote-card">
+  <p class="quote-card__text">"{{ quote.quote }}"</p>
+  <div class="quote-card__footer">
+    <span class="quote-card__author">— {{ quote.author }}</span>
+    <span class="quote-card__type">{{ quote.type }}</span>
+  </div>
+
+  @if(isLoggedIn) {
+    <div class="quote-card__actions">
+      <button class="quote-card__edit" (click)="edit.emit(quote)">✏️</button>
+      <button class="quote-card__delete" (click)="delete.emit(quote._id)">🗑</button>
+    </div>
+  }
+</div>

@@ -1,0 +1,17 @@
+<div class="favorites">
+  <h3 class="favorites__title">ფავორიტები</h3>
+
+  @if(isLoading()) {
+    <div class="favorites__loading">იტვირთება...</div>
+  } @else if(favorites().length === 0) {
+    <div class="favorites__empty">
+      <p>ფავორიტები ცარიელია 🤍</p>
+    </div>
+  } @else {
+    <div class="favorites__grid">
+      @for(product of favorites(); track product._id) {
+        <app-product-card [product]="product"></app-product-card>
+      }
+    </div>
+  }
+</div>

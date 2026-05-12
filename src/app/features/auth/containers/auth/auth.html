@@ -1,0 +1,37 @@
+<div class="auth">
+  <div class="auth__container">
+
+    <div class="auth__tabs">
+      <button
+        class="auth__tab"
+        [class.auth__tab--active]="activeTab() === 'signIn'"
+        (click)="activeTab.set('signIn')"
+      >
+        შესვლა
+      </button>
+      <button
+        class="auth__tab"
+        [class.auth__tab--active]="activeTab() === 'signUp'"
+        (click)="activeTab.set('signUp')"
+      >
+        რეგისტრაცია
+      </button>
+      <button
+        class="auth__tab"
+        [class.auth__tab--active]="activeTab() === 'recovery'"
+        (click)="activeTab.set('recovery')"
+      >
+        პაროლის აღდგენა
+      </button>
+    </div>
+
+    @if(activeTab() === 'signIn') {
+      <app-sign-in></app-sign-in>
+    } @else if(activeTab() === 'signUp') {
+      <app-sign-up></app-sign-up>
+    } @else {
+      <app-recovery></app-recovery>
+    }
+
+  </div>
+</div>

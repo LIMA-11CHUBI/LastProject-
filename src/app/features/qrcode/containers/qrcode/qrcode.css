@@ -1,0 +1,29 @@
+.qrcode {
+  min-height: calc(100vh - 64px);
+  background-color: #0d0d1a;
+  padding: 24px;
+}
+
+.qrcode__container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.qrcode__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 24px;
+}
+
+.qrcode__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .qrcode__content {
+    grid-template-columns: 1fr;
+  }
+}

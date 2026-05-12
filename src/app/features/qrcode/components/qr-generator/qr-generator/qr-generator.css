@@ -1,0 +1,87 @@
+.qr-generator {
+  background-color: #13132a;
+  border: 1px solid #2d2d5a;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.1);
+}
+
+.qr-generator__tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.qr-generator__tab {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #2d2d5a;
+  border-radius: 8px;
+  background: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.qr-generator__tab--active {
+  border-color: #7c3aed;
+  color: #a855f7;
+  background-color: rgba(124, 58, 237, 0.1);
+}
+
+.qr-generator__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.qr-generator__field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #a855f7;
+}
+
+.qr-generator__field input {
+  padding: 10px 14px;
+  border: 1px solid #2d2d5a;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #1a1a35;
+  color: #e2e8f0;
+  transition: border-color 0.2s;
+}
+
+.qr-generator__field input:focus {
+  border-color: #7c3aed;
+}
+
+.qr-generator__error {
+  font-size: 0.8rem;
+  color: #ef4444;
+}
+
+.qr-generator__btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.qr-generator__btn:hover:not([disabled]) {
+  opacity: 0.9;
+}
+
+.qr-generator__btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

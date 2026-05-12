@@ -1,0 +1,44 @@
+<div class="product-card" [routerLink]="['/product', product._id]">
+  <div class="product-card__image">
+    <img [src]="product.thumbnail" [alt]="product.title" />
+    <button
+      class="product-card__favorite"
+      (click)="toggleFavorite($event)"
+      [class.product-card__favorite--active]="isFavorite()"
+    >
+      {{ isFavorite() ? '❤️' : '🤍' }}
+    </button>
+  </div>
+
+  <div class="product-card__info">
+    <h3 class="product-card__title">{{ product.title }}</h3>
+    <p class="product-card__brand">{{ product.brand }}</p>
+
+    <div class="product-card__rating">
+      <span>⭐</span>
+      <span>{{ product.rating }}</span>
+    </div>
+
+    <div class="product-card__price">
+      @if(product.price.discountPercentage > 0) {
+        <span class="product-card__price--old">
+          {{ product.price.beforeDiscount }} {{ product.price.currency }}
+        </span>
+        <span class="product-card__price--discount">
+          -{{ product.price.discountPercentage }}%
+        </span>
+      }
+      <span class="product-card__price--current">
+        {{ product.price.current }} {{ product.price.currency }}
+      </span>
+    </div>
+
+    <button
+      class="product-card__cart"
+      (click)="addToCart($event)"
+      [disabled]="isAddingToCart() || product.stock === 0"
+    >
+      {{ product.stock === 0 ? 'მარაგი ამოწურულია' : isAddingToCart() ? '...' : '🛒 კალათაში' }}
+    </button>
+  </div>
+</div>
