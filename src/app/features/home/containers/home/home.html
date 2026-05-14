@@ -1,7 +1,11 @@
-<div class="home">
-  <div class="home__content">
 
-    <aside class="home__filters">
+<div class="home">
+  <button class="home__filter-toggle" (click)="isFilterOpen.set(!isFilterOpen())">
+    ☰ ფილტრაცია {{ isFilterOpen() ? '▲' : '▼' }}
+  </button>
+
+  <div class="home__content">
+    <aside class="home__filters" [class.home__filters--open]="isFilterOpen()">
       <app-filters
         [categories]="categories()"
         [brands]="brands()"
@@ -27,6 +31,5 @@
         ></app-pagination>
       }
     </main>
-
   </div>
 </div>

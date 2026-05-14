@@ -47,4 +47,13 @@ logout(): void {
   this.isDropdownOpen = false;
   this.router.navigate(['/']);
 }
+
+
+
+
+isMobileMenuOpen = false;
+
+toggleMobileMenu(): void {
+  this.isMobileMenuOpen = !this.isMobileMenuOpen;
+}
 }

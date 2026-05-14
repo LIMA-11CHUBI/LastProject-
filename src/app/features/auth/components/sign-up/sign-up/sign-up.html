@@ -74,6 +74,9 @@
 
       <div class="sign-up__field">
         <label>ავატარი (URL)</label>
+        @if(form.get('avatar')?.value) {
+          <img [src]="form.get('avatar')?.value" class="sign-up__avatar-preview"/>
+        }
         <input type="text" formControlName="avatar" placeholder="https://..."/>
         @if(form.get('avatar')?.invalid && form.get('avatar')?.touched) {
           <span class="sign-up__error">ავატარი სავალდებულოა</span>

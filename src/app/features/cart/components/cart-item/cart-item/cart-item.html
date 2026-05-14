@@ -17,15 +17,16 @@
     <p class="cart-item__price">{{ item.pricePerQuantity }} ₾</p>
   </div>
 
+
   <div class="cart-item__quantity">
-    <button (click)="decrease()">-</button>
-    <span>{{ item.quantity }}</span>
-    <button (click)="increase()">+</button>
-  </div>
+  <button (click)="decrease()"><i class="bi bi-dash-circle-fill"></i></button>
+  <span>{{ item.quantity }}</span>
+  <button (click)="increase()"><i class="bi bi-plus-circle-fill"></i></button>
+</div>
 
   <div class="cart-item__total">
     <p>{{ item.pricePerQuantity * item.quantity }} ₾</p>
   </div>
 
-  <button class="cart-item__delete" (click)="delete()">🗑</button>
+  <button class="cart-item__delete" (click)="delete()"><i class="bi bi-trash3-fill"></i></button>
 </div>

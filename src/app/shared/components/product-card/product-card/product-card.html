@@ -6,7 +6,11 @@
       (click)="toggleFavorite($event)"
       [class.product-card__favorite--active]="isFavorite()"
     >
-      {{ isFavorite() ? '❤️' : '🤍' }}
+      @if(isFavorite()) {
+        <i class="bi bi-heart-fill"></i>
+      } @else {
+        <i class="bi bi-heart"></i>
+      }
     </button>
   </div>
 
@@ -15,7 +19,7 @@
     <p class="product-card__brand">{{ product.brand }}</p>
 
     <div class="product-card__rating">
-      <span>⭐</span>
+      <span><i class="bi bi-star-fill"></i></span>
       <span>{{ product.rating }}</span>
     </div>
 
@@ -38,7 +42,13 @@
       (click)="addToCart($event)"
       [disabled]="isAddingToCart() || product.stock === 0"
     >
-      {{ product.stock === 0 ? 'მარაგი ამოწურულია' : isAddingToCart() ? '...' : '🛒 კალათაში' }}
+      @if(product.stock === 0) {
+        მარაგი ამოწურულია
+      } @else if(isAddingToCart()) {
+        ...
+      } @else {
+        <i class="bi bi-cart-fill"></i> კალათაში
+      }
     </button>
   </div>
 </div>

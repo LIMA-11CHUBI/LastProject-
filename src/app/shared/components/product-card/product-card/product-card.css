@@ -134,3 +134,18 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+
+
+.product-card__favorite i {
+  color: #94a3b8;
+  transition: color 0.2s;
+}
+
+.product-card__favorite--active i {
+  color: #ef4444;
+}
+
+.product-card__favorite:hover i {
+  color: #ef4444;
+}

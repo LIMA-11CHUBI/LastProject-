@@ -12,12 +12,12 @@
       </div>
     </div>
 
-    <button class="carousel__btn carousel__btn--prev" (click)="prev()">
-      
-    </button>
-    <button class="carousel__btn carousel__btn--next" (click)="next()">
-      >
-    </button>
+ <button class="carousel__btn carousel__btn--prev" (click)="prev()">
+  <i class="bi bi-caret-left-fill"></i>
+</button>
+<button class="carousel__btn carousel__btn--next" (click)="next()">
+  <i class="bi bi-caret-right-fill"></i>
+</button>
 
     <div class="carousel__dots">
       @for(product of products; track product._id; let i = $index) {

@@ -46,7 +46,10 @@
 
     <div class="profile-info__field">
       <label>ავატარი (URL)</label>
-      <input type="text" formControlName="avatar"/>
+      @if(form.get('avatar')?.value) {
+        <img [src]="form.get('avatar')?.value" class="profile-info__avatar-preview"/>
+      }
+      <input type="text" formControlName="avatar" placeholder="https://..."/>
     </div>
 
     @if(isSuccess()) {

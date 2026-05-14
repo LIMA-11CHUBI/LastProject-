@@ -96,4 +96,7 @@ export class HomeComponent implements OnInit {
     this.showCarousel.set(false);
     this.loadProducts();
   }
+
+
+  isFilterOpen = signal(false);
 }

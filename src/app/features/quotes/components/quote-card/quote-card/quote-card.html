@@ -7,8 +7,8 @@
 
   @if(isLoggedIn) {
     <div class="quote-card__actions">
-      <button class="quote-card__edit" (click)="edit.emit(quote)">✏️</button>
-      <button class="quote-card__delete" (click)="delete.emit(quote._id)">🗑</button>
+      <button class="quote-card__edit" (click)="edit.emit(quote)"><i class="bi bi-pencil-fill"></i></button>
+      <button class="quote-card__delete" (click)="delete.emit(quote._id)"><i class="bi bi-trash-fill"></i></button>
     </div>
   }
 </div>

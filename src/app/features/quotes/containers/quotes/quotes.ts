@@ -25,6 +25,8 @@ export class QuotesComponent implements OnInit {
   selectedType = signal('');
   showAddForm = signal(false);
   editingQuote = signal<Quote | null>(null);
+  errorMessage = signal('');
+  successMessage = signal('');
 
   form: FormGroup;
 
@@ -90,6 +92,8 @@ export class QuotesComponent implements OnInit {
   startEdit(quote: Quote): void {
     this.editingQuote.set(quote);
     this.showAddForm.set(true);
+    this.errorMessage.set('');
+    this.successMessage.set('');
     this.form.patchValue({
       author: quote.author,
       quote: quote.quote,
@@ -100,25 +104,41 @@ export class QuotesComponent implements OnInit {
   cancelForm(): void {
     this.showAddForm.set(false);
     this.editingQuote.set(null);
+    this.errorMessage.set('');
+    this.successMessage.set('');
     this.form.reset();
   }
 
   onSubmit(): void {
     if (this.form.invalid) return;
+    this.errorMessage.set('');
+    this.successMessage.set('');
     const editing = this.editingQuote();
 
     if (editing) {
       this.quoteService.updateQuote(editing._id, this.form.value).subscribe({
         next: () => {
+          this.successMessage.set('✅ ციტატა წარმატებით განახლდა!');
           this.cancelForm();
           this.loadQuotes();
+        },
+        error: () => {
+          this.errorMessage.set('განახლება ვერ მოხერხდა!');
         },
       });
     } else {
       this.quoteService.addQuote(this.form.value).subscribe({
         next: () => {
+          this.successMessage.set('✅ ციტატა წარმატებით დაემატა!');
           this.cancelForm();
           this.loadQuotes();
+        },
+        error: (err) => {
+          if (err.status === 409) {
+            this.errorMessage.set('ეს ციტატა უკვე არსებობს!');
+          } else {
+            this.errorMessage.set('დამატება ვერ მოხერხდა!');
+          }
         },
       });
     }
@@ -127,6 +147,7 @@ export class QuotesComponent implements OnInit {
   onDelete(id: string): void {
     this.quoteService.deleteQuote(id).subscribe({
       next: () => this.loadQuotes(),
+      error: () => this.errorMessage.set('წაშლა ვერ მოხერხდა!'),
     });
   }
 }

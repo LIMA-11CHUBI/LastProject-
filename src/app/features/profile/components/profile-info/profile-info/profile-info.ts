@@ -2,7 +2,7 @@ import { Component, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../../../core/services/auth';
-import { User, UpdateUserDto } from '../../../../../core/models/auth';
+import { User } from '../../../../../core/models/auth';
 
 @Component({
   selector: 'app-profile-info',
@@ -46,7 +46,6 @@ export class ProfileInfoComponent {
   }
 
   onSubmit(): void {
-    if (this.form.invalid) return;
     this.isLoading.set(true);
     this.isSuccess.set(false);
     this.errorMessage.set('');
@@ -55,6 +54,7 @@ export class ProfileInfoComponent {
       next: () => {
         this.isSuccess.set(true);
         this.isLoading.set(false);
+        this.authService.loadCurrentUser();
       },
       error: () => {
         this.errorMessage.set('განახლება ვერ მოხერხდა!');

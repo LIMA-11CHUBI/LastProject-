@@ -4,7 +4,7 @@
       <h2 class="quotes__title">ციტატები</h2>
       @if(authService.currentUser()) {
         <button class="quotes__add-btn" (click)="showAddForm.set(true)">
-          + ციტატის დამატება
+          <i class="bi bi-plus-circle-fill"></i> ციტატის დამატება
         </button>
       }
     </div>
@@ -83,6 +83,11 @@
         (pageChange)="onPageChange($event)"
       ></app-pagination>
     }
-
+@if(errorMessage()) {
+  <div class="quotes__form-error">{{ errorMessage() }}</div>
+}
+@if(successMessage()) {
+  <div class="quotes__form-success">{{ successMessage() }}</div>
+}
   </div>
 </div>

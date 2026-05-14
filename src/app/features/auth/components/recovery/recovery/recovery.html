@@ -3,7 +3,7 @@
 
   @if(isSuccess()) {
     <div class="recovery__success">
-      ✅ პაროლის აღდგენის ინსტრუქცია გაგზავნილია ელ-ფოსტაზე!
+      <i class="bi bi-check-circle-fill"></i> პაროლის აღდგენის ინსტრუქცია გაგზავნილია ელ-ფოსტაზე!
     </div>
   } @else {
     <form [formGroup]="form" (ngSubmit)="onSubmit()">

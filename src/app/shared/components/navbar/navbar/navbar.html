@@ -2,12 +2,12 @@
   <div class="navbar__brand">
     <a routerLink="/">MyShop</a>
   </div>
+
   <div class="navbar__links">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">მთავარი</a>
     <a routerLink="/quotes" routerLinkActive="active">ციტატები</a>
     <a routerLink="/qrcode" routerLinkActive="active">QR კოდი</a>
     <a routerLink="/admin" routerLinkActive="active">ადმინი</a>
-    
   </div>
 
   <div class="navbar__search">
@@ -17,16 +17,19 @@
       [formControl]="searchControl"
       (keyup.enter)="onSearch()"
     />
-    <button (click)="onSearch()">🔍</button>
+    <button (click)="onSearch()"><i class="bi bi-search"></i></button>
   </div>
 
-  <div class="navbar__profile">
+ <div class="navbar__profile">
+
+
     <button class="navbar__profile-btn" (click)="toggleDropdown()">
-      <img
-        [src]="authService.currentUser()?.avatar || 'assets/default-avatar.png'"
-        alt="profile"
-      />
-    </button>
+  @if(authService.currentUser()?.avatar) {
+    <img [src]="authService.currentUser()?.avatar" alt="profile" />
+  } @else {
+    <i class="bi bi-person-circle"></i>
+  }
+</button>
 
     @if(isDropdownOpen) {
       <div class="navbar__dropdown">
@@ -36,9 +39,38 @@
           <button (click)="logout()">გასვლა</button>
         } @else {
           <a routerLink="/auth" (click)="isDropdownOpen = false">შესვლა / რეგისტრაცია</a>
-          
         }
       </div>
     }
   </div>
+
+  <button class="navbar__hamburger" (click)="toggleMobileMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
+
+<div class="navbar__mobile-menu" [class.open]="isMobileMenuOpen">
+  <div class="navbar__mobile-search">
+    <input
+      type="text"
+      placeholder="ძებნა..."
+      [formControl]="searchControl"
+      (keyup.enter)="onSearch(); isMobileMenuOpen = false"
+    />
+    <button (click)="onSearch(); isMobileMenuOpen = false"><i class="bi bi-search"></i></button>
+  </div>
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="isMobileMenuOpen = false">მთავარი</a>
+  <a routerLink="/quotes" routerLinkActive="active" (click)="isMobileMenuOpen = false">ციტატები</a>
+  <a routerLink="/qrcode" routerLinkActive="active" (click)="isMobileMenuOpen = false">QR კოდი</a>
+  <a routerLink="/echo" routerLinkActive="active" (click)="isMobileMenuOpen = false">Echo</a>
+  <a routerLink="/admin" routerLinkActive="active" (click)="isMobileMenuOpen = false">ადმინი</a>
+  @if(authService.currentUser()) {
+    <a routerLink="/profile" (click)="isMobileMenuOpen = false">პროფილი</a>
+    <a routerLink="/cart" (click)="isMobileMenuOpen = false">კალათა</a>
+    <button (click)="logout(); isMobileMenuOpen = false">გასვლა</button>
+  } @else {
+    <a routerLink="/auth" (click)="isMobileMenuOpen = false">შესვლა / რეგისტრაცია</a>
+  }
+</div>

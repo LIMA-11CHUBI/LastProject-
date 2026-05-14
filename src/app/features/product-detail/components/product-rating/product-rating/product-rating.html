@@ -2,7 +2,7 @@
   <h4 class="product-rating__title">შეაფასე პროდუქტი</h4>
 
   <div class="product-rating__current">
-    <span>მიმდინარე რეიტინგი: ⭐ {{ rating }}</span>
+    <span>მიმდინარე რეიტინგი: <i class="bi bi-star-fill"></i> {{ rating }}</span>
   </div>
 
   @if(isLoggedIn) {
@@ -15,7 +15,7 @@
           (mouseleave)="onLeave()"
           (click)="onRate(star)"
         >
-          ★
+          <i class="bi bi-star-fill"></i>
         </span>
       }
     </div>
